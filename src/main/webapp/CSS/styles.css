@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+body {
+	font-family: arial;
+	background-color: rgb(185, 179, 175);
+}
+
+pre{
+	font-family: sans-serif, serif;
+}
+
+.header {
+	display: inline-block;
+	width: 100%;
+	border-bottom: 1px solid black;
+	
+	vertical-align: middle;
+}
+
+h1 {
+	color: rgb(255, 255, 255);
+	background-color: red;
+}
+
+h2 {
+	color: rgb(255, 255, 255);
+	background-color: red;
+	text-align: center;
+}
+
+.wrong_cmd{
+	font-size: 12px;
+	text-align: center;
+}
+
+.ru, .en{
+	float:right;margin:0 5px;
+}
+
+.headerLeft {
+	float: left;margin:0;
+}
+
+.headerRight {
+	float: right; margin:0;
+}
+
+.clean{
+	float:right;margin:0;
+}
+
+button.user {
+	font-size: 12px;
+}
+
+button.news {
+	font-size: 12px;
+}
+
+button {
+	font-size: 10px;
+}
+
+input {
+	font-size: 10px;
+}
+
+.info {
+	font-family: sans-serif, serif;
+	font-size: 24px;
+	font-style: italic;
+	margin: auto;
+}
+
+#body {
+	text-align: center;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+
+
+#pagination {
+	display: inline-block;
+	text-align: center;
+}
+/* .clear {
+	clear: both;
+} */
