@@ -45,7 +45,8 @@ public class UserDB implements UserDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug user DAO registration: {}", "Bean userData: " + userData.toString() + " SQL: " + sql);
+				log.debug("Debug user DAO registration: {}",
+						"Bean userData: " + userData.toString() + " SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't regist user (sql) :: userdaoregistration", e);
@@ -73,7 +74,8 @@ public class UserDB implements UserDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug user DAO update: {}", "Bean userData: " + userData.toString() + " SQL: " + sql);
+				log.debug("Debug user DAO update: {}",
+						"Bean userData: " + userData.toString() + " SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't update user data (sql) :: userdaoupdate", e);
@@ -100,7 +102,8 @@ public class UserDB implements UserDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug user DAO delete: {}", "Bean userData: " + userData.toString() + " SQL: " + sql);
+				log.debug("Debug user DAO delete: {}",
+						"Bean userData: " + userData.toString() + " SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't delete user (sql) :: userdaodeletecon", e);
@@ -133,7 +136,8 @@ public class UserDB implements UserDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug user DAO delete: {}", "Bean userData: " + userData.toString() + " SQL: " + sql);
+				log.debug("Debug user DAO delete: {}",
+						"Bean userData: " + userData.toString() + " SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't auth user (sql) :: userdaoauthorization", e);
@@ -166,7 +170,8 @@ public class UserDB implements UserDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug user DAO password: {}", "Bean userData: " + userData.toString() + " SQL: " + sql);
+				log.debug("Debug user DAO password: {}",
+						"Bean userData: " + userData.toString() + " SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't change password (sql) :: userdaopassword", e);
@@ -198,7 +203,8 @@ public class UserDB implements UserDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug user DAO loadUserData: {}", "Bean user: " + user.toString() + " SQL: " + sql);
+				log.debug("Debug user DAO loadUserData: {}",
+						"Bean user: " + user.toString() + " SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't load userData (sql) :: userdaoloaduserdata", e);
@@ -232,7 +238,8 @@ public class UserDB implements UserDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug user DAO loadSgnAuthor: {}", "Bean user: " + user.toString() + " SQL: " + sql);
+				log.debug("Debug user DAO loadSgnAuthor: {}",
+						"Bean user: " + user.toString() + " SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't load data sgnAuthor (sql) :: userdaoloadsgndata", e);

@@ -36,7 +36,7 @@ public class WorkWithObjectField {
 				if (log.isDebugEnabled()) {
 
 					log.debug("Debug WorkWithObjectField value: {}",
-							"object: " + object.toString() + "; field:" + field);
+							"object: " + object.toString() + "; field:" + field + ". EOM. Exc: " + e);
 				}
 
 				throw new UtilException("Illegal exception in get field :: wwofv", e);
@@ -69,8 +69,9 @@ public class WorkWithObjectField {
 
 					if (log.isDebugEnabled()) {
 
-						log.debug("Debug WorkWithObjectField methodGet: {}", "object: " + object.toString()
-								+ "; nameMatch:" + nameMatch + "; method:" + method + "; methodName:" + methodName);
+						log.debug("Debug WorkWithObjectField methodGet: {}",
+								"object: " + object.toString() + "; nameMatch:" + nameMatch + "; method:" + method
+										+ "; methodName:" + methodName + ". EOM. Exc: " + e);
 					}
 
 					throw new UtilException("Illegal exception in reflect get method :: wwofmg", e);
@@ -106,7 +107,7 @@ public class WorkWithObjectField {
 
 						log.debug("Debug WorkWithObjectField methodSet: {}",
 								"object: " + object.toString() + "; nameMatch:" + nameMatch + "; method:" + method
-										+ "; methodName:" + methodName + "; value:" + value);
+										+ "; methodName:" + methodName + "; value:" + value + ". EOM. Exc: " + e);
 					}
 
 					throw new UtilException("Illegal exception in reflect set method :: wwofms", e);

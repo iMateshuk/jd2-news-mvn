@@ -58,8 +58,8 @@ public class NewsDB implements NewsDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug news DAO add: {}",
-						"Bean user: " + user.toString() + ", news:" + news.toString() + "; SQL: " + sql);
+				log.debug("Debug news DAO add: {}", "Bean user: " + user.toString() + ", news:" + news.toString()
+						+ "; SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't add news (sql) :: newsdaoaddcon", e);
@@ -91,8 +91,8 @@ public class NewsDB implements NewsDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug news DAO update: {}",
-						"Bean user: " + user.toString() + ", news:" + news.toString() + "; SQL: " + sql);
+				log.debug("Debug news DAO update: {}", "Bean user: " + user.toString() + ", news:" + news.toString()
+						+ "; SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't update news (sql) :: newsupdatecon", e);
@@ -129,8 +129,8 @@ public class NewsDB implements NewsDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug news DAO delete: {}",
-						"Bean news:" + news.toString() + "; SQL Select: " + sqlSelect + "; SQL Delete: " + sqlDelete);
+				log.debug("Debug news DAO delete: {}", "Bean news:" + news.toString() + "; SQL Select: " + sqlSelect
+						+ "; SQL Delete: " + sqlDelete + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("newsdaodeletecon", e);
@@ -184,8 +184,8 @@ public class NewsDB implements NewsDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug news DAO choose: {}",
-						"Bean news: " + news.toString() + ", newsData:" + newsData.toString() + "; SQL: " + sql);
+				log.debug("Debug news DAO choose: {}", "Bean news: " + news.toString() + ", newsData:"
+						+ newsData.toString() + "; SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException(" Can't choose newses (sql) :: newsdaochoose", e);
@@ -209,7 +209,7 @@ public class NewsDB implements NewsDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug news DAO load: {}", "SQL: " + sql);
+				log.debug("Debug news DAO load: {}", "SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't load newses for main page (sql) :: newsdaoload", e);
@@ -246,7 +246,8 @@ public class NewsDB implements NewsDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug news DAO chooseNews: {}", "Bean news:" + news.toString() + "; SQL: " + sql);
+				log.debug("Debug news DAO chooseNews: {}",
+						"Bean news:" + news.toString() + "; SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't choose news (sql) :: newsdaochoosetitle", e);
@@ -281,8 +282,8 @@ public class NewsDB implements NewsDAO {
 
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug news DAO sgnAuthor: {}",
-						"Bean user: " + user.toString() + ", news:" + news.toString() + "; SQL: " + sql);
+				log.debug("Debug news DAO sgnAuthor: {}", "Bean user: " + user.toString() + ", news:" + news.toString()
+						+ "; SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't sgn to author (sql) :: newsdaosgnauthor", e);
@@ -326,7 +327,7 @@ public class NewsDB implements NewsDAO {
 			if (log.isDebugEnabled()) {
 
 				log.debug("Debug news DAO unsgnAuthor: {}", "Bean user: " + user.toString() + ", author:"
-						+ author.toString() + "; SQL Ids: " + sqlIds + ", SQL Unsgn:" + sqlUnsgn);
+						+ author.toString() + "; SQL Ids: " + sqlIds + ", SQL Unsgn:" + sqlUnsgn + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't unsgn from author (sql) :: newsdaounsgnauthor", e);
@@ -336,7 +337,7 @@ public class NewsDB implements NewsDAO {
 
 	@Override
 	public NewsData sgnAuthorView(User user, NewsData newsData) throws DAOException {
-		
+
 		final String userLogin = user.getLogin();
 
 		final String sql = CheckField.checkAge(user.getAge())
@@ -366,11 +367,11 @@ public class NewsDB implements NewsDAO {
 			return newsData;
 
 		} catch (SQLException | ConnectionPoolException e) {
-			
+
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug news DAO choose: {}",
-						"Bean user: " + user.toString() + ", newsData:" + newsData.toString() + "; SQL: " + sql);
+				log.debug("Debug news DAO choose: {}", "Bean user: " + user.toString() + ", newsData:"
+						+ newsData.toString() + "; SQL: " + sql + ". EOM. Exc: " + e);
 			}
 
 			throw new DAOException("Can't choose newses for sgnAuthor (sql) :: newsdaosgnauthorview", e);

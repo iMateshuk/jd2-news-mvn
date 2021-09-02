@@ -16,7 +16,7 @@ import by.project.news.bean.UserData.UserDataBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class BeanCreator {
-	
+
 	private final static Logger log = LogManager.getLogger(BeanCreator.class);
 
 	private final static String USER_ROLE = "user";
@@ -24,16 +24,16 @@ public class BeanCreator {
 	public static User createUser(ResultSet rs) throws UtilException {
 
 		Map<CombineEnum, String> fieldsData = null;
-		
+
 		try {
-			
+
 			fieldsData = createDataWithRS(FieldMapCreator.create(UserField.class.getEnumConstants()), rs);
-			
+
 		} catch (SQLException e) {
-			
+
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug BeanCreator createUser: {}", "ResultSet: " + rs.toString());
+				log.debug("Debug BeanCreator createUser: {}", "ResultSet: " + rs.toString() + ". EOM. Exc: " + e);
 			}
 
 			throw new UtilException("Cann't createUser with rs :: commonerror", e);
@@ -68,10 +68,10 @@ public class BeanCreator {
 			fieldsData = createDataWithRS(FieldMapCreator.create(NewsField.class.getEnumConstants()), rs);
 
 		} catch (SQLException e) {
-			
+
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug BeanCreator createNews: {}", "ResultSet: " + rs.toString());
+				log.debug("Debug BeanCreator createNews: {}", "ResultSet: " + rs.toString() + ". EOM. Exc: " + e);
 			}
 
 			throw new UtilException("Cann't createNews with rs :: commonerror", e);
@@ -110,10 +110,10 @@ public class BeanCreator {
 			fieldsData = createDataWithRS(FieldMapCreator.create(UserDataField.class.getEnumConstants()), rs);
 
 		} catch (SQLException e) {
-			
+
 			if (log.isDebugEnabled()) {
 
-				log.debug("Debug BeanCreator createUserData: {}", "ResultSet: " + rs.toString());
+				log.debug("Debug BeanCreator createUserData: {}", "ResultSet: " + rs.toString() + ". EOM. Exc: " + e);
 			}
 
 			throw new UtilException("Cann't createUserData with rs :: commonerror", e);

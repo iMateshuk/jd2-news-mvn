@@ -3,6 +3,9 @@ package by.project.news.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.project.news.controller.impl.ChangeLocal;
 import by.project.news.controller.impl.GoToAuthorizationPage;
 import by.project.news.controller.impl.GoToMainPage;
@@ -34,9 +37,10 @@ import by.project.news.controller.impl.UserOperDelete;
 import by.project.news.controller.impl.UserOperPassword;
 import by.project.news.controller.impl.UserOperUpdate;
 import by.project.news.controller.impl.UserOperRegistration;
-import by.project.news.util.LogWriter;
 
 public class CommandProvider {
+	
+	private final static Logger log = LogManager.getLogger(CommandProvider.class);
 
 	private Map<CommandName, Command> commands = new HashMap<CommandName, Command>();
 
@@ -96,8 +100,7 @@ public class CommandProvider {
 			
 		} catch (IllegalArgumentException e) {
 			
-			LogWriter.writeLog(e);
-			
+			log.error(e);			
 			commandName = CommandName.UNKNOWN_COMMAND;
 		}
 
