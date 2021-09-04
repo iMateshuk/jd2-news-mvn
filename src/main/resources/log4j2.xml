@@ -24,19 +24,19 @@
       <appender-ref ref="STDOUT"/>
     </logger>
   
- <!--    <logger name="by.project.news.controller" level="error">
+ <!--    <logger name="by.project.news.controller" level="info" additivity="false">
       <appender-ref ref="STDOUT"/>
     </logger>
     
-    <logger name="by.project.news.service" level="error">
+    <logger name="by.project.news.service" level="error" additivity="false">
       <appender-ref ref="STDOUT"/>
     </logger>
     
-    <logger name="by.project.news.dao" level="error">
+    <logger name="by.project.news.dao" level="error" additivity="false">
       <appender-ref ref="STDOUT"/>
     </logger>
     
-     <logger name="by.project.news.util" level="error">
+     <logger name="by.project.news.util" level="warn" additivity="false">
       <appender-ref ref="STDOUT"/>
     </logger> -->
     

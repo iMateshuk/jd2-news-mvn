@@ -26,8 +26,8 @@ import java.util.concurrent.Executor;
 
 public class ConnectionPool {
 
-	private final static ConnectionPool instance = new ConnectionPool();
-
+	private final static DBResourceManager dbResourceManager = DBResourceManager.getInstance();
+	
 	private BlockingQueue<Connection> connectionQueue;
 	private BlockingQueue<Connection> givenAwayConQueue;
 
@@ -35,23 +35,21 @@ public class ConnectionPool {
 	private String user;
 	private String password;
 	private int poolSize;
+	
+	private final static ConnectionPool instance = new ConnectionPool();
 
 	{
-
 		try {
 
-			Class.forName(DBResourceManager.getInstance().getValue(DBParameter.DB_DRIVER));
+			Class.forName(dbResourceManager.getValue(DBParameter.DB_DRIVER));
 
 		} catch (ClassNotFoundException e) {
 
 			throw new ExceptionInInitializerError(e);
 		}
-
 	}
 
 	private ConnectionPool() {
-
-		DBResourceManager dbResourceManager = DBResourceManager.getInstance();
 
 		this.url = dbResourceManager.getValue(DBParameter.DB_URL);
 		this.user = dbResourceManager.getValue(DBParameter.DB_USER);

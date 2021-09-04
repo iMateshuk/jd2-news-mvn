@@ -7,7 +7,7 @@ public class DBResourceManager {
 	
 	private static final String DB_FILENAME = "properties.db";
 	
-	private final static DBResourceManager INSTANCE = new DBResourceManager();
+	private static final DBResourceManager INSTANCE = new DBResourceManager();
 	
 	private ResourceBundle bundle = ResourceBundle.getBundle(DB_FILENAME, Locale.ENGLISH);
 	
