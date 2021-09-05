@@ -17,10 +17,13 @@ public class DAOUserDBTest {
 
 	User user = new User.UserBuilder().setLogin("test").setRole("user").setAge("45").build();
 
+	UserData wrongUser = new UserData.UserDataBuilder().setLogin("!test!")
+			.setPassword(Generator.genStringHash("!test!")).build();
+
 	UserDAO userDAO = new UserDB();
 
 	@Test
-	public void daoRegTestNewUser() throws DAOException {
+	public void daoRegNewUserTest() throws DAOException {
 
 		try {
 
@@ -43,6 +46,12 @@ public class DAOUserDBTest {
 	public void daoAuthUserTest() throws DAOException {
 
 		Assert.assertEquals(user, userDAO.authorization(userData));
+	}
+	
+	@Test(expected = DAOException.class)
+	public void daoAuthWrongUserTest() throws DAOException {
+
+		userDAO.authorization(wrongUser);
 	}
 
 }
