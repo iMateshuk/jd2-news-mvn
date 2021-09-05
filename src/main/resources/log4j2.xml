@@ -2,23 +2,29 @@
 <configuration>
 
   <Properties>
-    <Property name="filename">logs/log.log</Property>
+    <Property name="filename">logs/NewsApp.log</Property>
     <Property name="basePatterLayout">%d{ISO8601} [%-5p] (%F:%L) - %m%n</Property>
+    <Property name="filePatterLayout">%d{yyyy.MM.dd HH:mm:ss} [%-5p] [%t] %C{2} %F%L - %m%n</Property>
   </Properties>
   
   <appenders>
+  
     <Console name="STDOUT" target="SYSTEM_OUT">
       <PatternLayout pattern="${basePatterLayout}" />
     </Console>
+    
+    <File name="FILE" fileName="${filename}">
+        <PatternLayout pattern="${filePatterLayout}"/>
+    </File>
+    
   </appenders>
   
   <loggers>
-  
  
- 	<logger name="by.project.news.dao.impl.UserDB" level="debug" additivity="false">
+ 	<!-- <logger name="by.project.news.dao.impl.UserDB" level="debug" additivity="false">
   		<appender-ref ref="STDOUT"/>
-   	</logger> 
-
+  		<appender-ref ref="FILE"/>
+   	</logger>  -->
   
     <logger name="by.project.news" level="error" additivity="false">
       <appender-ref ref="STDOUT"/>

@@ -17,32 +17,32 @@ public class DAOUserDBTest {
 
 	User user = new User.UserBuilder().setLogin("test").setRole("user").setAge("45").build();
 
-	UserDAO userDB = new UserDB();
+	UserDAO userDAO = new UserDB();
 
 	@Test
 	public void daoRegTestNewUser() throws DAOException {
 
 		try {
 
-			userDB.delete(userData);
+			userDAO.delete(userData);
 
 		} catch (DAOException ignore) {
 
 		}
 
-		userDB.registration(userData);
+		userDAO.registration(userData);
 	}
 
 	@Test(expected = DAOException.class)
 	public void daoRegTestUserExist() throws DAOException {
 
-		userDB.registration(userData);
+		userDAO.registration(userData);
 	}
 
 	@Test
 	public void daoAuthUserTest() throws DAOException {
 
-		Assert.assertEquals(user, userDB.authorization(userData));
+		Assert.assertEquals(user, userDAO.authorization(userData));
 	}
 
 }
