@@ -6,17 +6,18 @@ import org.junit.Test;
 import by.project.news.bean.User;
 import by.project.news.bean.UserData;
 import by.project.news.dao.DAOException;
+import by.project.news.dao.UserDAO;
 import by.project.news.dao.impl.UserDB;
 import by.project.news.util.Generator;
 
-public class DAOTest {
+public class DAOUserDBTest {
 
 	UserData userData = new UserData.UserDataBuilder().setLogin("test").setPassword(Generator.genStringHash("test"))
 			.setAge("45").setRole("user").build();
 
 	User user = new User.UserBuilder().setLogin("test").setRole("user").setAge("45").build();
 
-	UserDB userDB = new UserDB();
+	UserDAO userDB = new UserDB();
 
 	@Test
 	public void daoRegTestNewUser() throws DAOException {
