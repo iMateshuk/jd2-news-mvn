@@ -180,8 +180,8 @@
 								<c:set var="tdEnd" value="${maxPages}" />
 							</c:when>
 							<c:otherwise>
-								<c:set var="tdBegin" value="${page - tdCell}" />
-								<c:set var="tdEnd" value="${tdBegin + tdCell - 1}" />
+								<c:set var="tdBegin" value="${page - tdCell}"/>
+								<c:set var="tdEnd" value="${tdBegin + tdCell - 1}"/>
 							</c:otherwise>
 						</c:choose>
 						<table border="0" cellpadding="${tdCell}" cellspacing="${tdCell}">

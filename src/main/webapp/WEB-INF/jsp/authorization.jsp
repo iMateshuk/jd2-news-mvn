@@ -61,7 +61,7 @@
 			
 				<fmt:message bundle="${loc}" key="local.loctextdaousererror.name.${param.message}" var="message" />
 
-				<c:out value="${message} : ${param.newuser}" />
+				<c:out value="${message} : ${param.newuser}"/>
 				<br />
 				<br />
 			</c:if>

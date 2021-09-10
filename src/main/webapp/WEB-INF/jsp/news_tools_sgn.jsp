@@ -71,7 +71,7 @@
 					<c:forEach var="userData" items="${userSgn}">
 					
 						<c:out value="${name_text} ${userData.getName()} :@ ${userData.getLogin()}" />
-						<br />
+						<br/>
 					</c:forEach>
 					<br />
 					

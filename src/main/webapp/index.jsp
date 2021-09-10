@@ -14,7 +14,7 @@
 
 <body>
 
-	<c:set var="local" value="en" scope="session"  />
+	<c:set var="local" value="en" scope="session"/>
 
 	<c:redirect url ="Controller?command=main"></c:redirect>
 <%-- 	<%

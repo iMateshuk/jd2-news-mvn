@@ -15,6 +15,7 @@ public class NewsData implements Serializable {
 	private int page;
 	private int recordsPerPage;
 	private int maxNewses;
+
 	private List<News> newses;
 
 	NewsData() {
@@ -62,7 +63,7 @@ public class NewsData implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(maxNewses, recordsPerPage, newses, page);
+		return Objects.hash(maxNewses, page, recordsPerPage);
 	}
 
 	@Override
@@ -74,8 +75,7 @@ public class NewsData implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		NewsData other = (NewsData) obj;
-		return maxNewses == other.maxNewses && recordsPerPage == other.recordsPerPage
-				&& Objects.equals(newses, other.newses) && page == other.page;
+		return maxNewses == other.maxNewses && page == other.page && recordsPerPage == other.recordsPerPage;
 	}
 
 	@Override
