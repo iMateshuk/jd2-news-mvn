@@ -48,7 +48,7 @@ public class NewsOperADD implements Command {
 
 		try {
 
-			SessionWork.validateSession(session);
+			SessionWork.validateSessionUser(session);
 
 		} catch (UtilException e) {
 

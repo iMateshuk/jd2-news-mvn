@@ -34,7 +34,7 @@ public class GoToNewsAddPage implements Command {
 
 		try {
 
-			SessionWork.validateSession(request.getSession(false));
+			SessionWork.validateSessionUser(request.getSession(false));
 
 		} catch (UtilException e) {
 

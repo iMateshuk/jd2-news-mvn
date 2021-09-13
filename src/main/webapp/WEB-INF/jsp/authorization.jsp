@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <link href="CSS/userPageStyle.css" rel="stylesheet" type="text/css">
 
-<fmt:setLocale value="${sessionScope.local}" />
+<fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="localization.local" var="loc" />
 
 <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />

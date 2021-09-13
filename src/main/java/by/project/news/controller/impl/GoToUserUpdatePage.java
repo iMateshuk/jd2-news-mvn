@@ -52,7 +52,7 @@ public class GoToUserUpdatePage implements Command {
 		
 		try {
 
-			SessionWork.validateSession(session);
+			SessionWork.validateSessionUser(session);
 
 			User user = (User) session.getAttribute(USER);
 

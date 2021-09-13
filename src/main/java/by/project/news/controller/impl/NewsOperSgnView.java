@@ -54,7 +54,7 @@ public class NewsOperSgnView implements Command {
 
 		try {
 
-			SessionWork.validateSession(session);
+			SessionWork.validateSessionUser(session);
 
 		} catch (UtilException e) {
 

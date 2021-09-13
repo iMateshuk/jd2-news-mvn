@@ -53,7 +53,7 @@ public class GoToNewsViewPage implements Command {
 
 		try {
 
-			SessionWork.validateSession(session);
+			SessionWork.validateSessionUser(session);
 
 		} catch (UtilException e) {
 

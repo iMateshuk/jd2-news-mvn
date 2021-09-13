@@ -51,7 +51,7 @@ public class GoToNewsSgnPage implements Command {
 
 		try {
 
-			SessionWork.validateSession(session);
+			SessionWork.validateSessionUser(session);
 
 			request.setAttribute(ATTRIBUTE_USER_SGN, userService.loadSgnAuthor((User) session.getAttribute(USER)));
 

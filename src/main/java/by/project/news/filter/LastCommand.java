@@ -1,5 +1,6 @@
 package by.project.news.filter;
 
+
 import java.io.IOException;
 
 import by.project.news.controller.CommandName;
@@ -42,6 +43,7 @@ public class LastCommand implements Filter {
 		chain.doFilter(request, response);
 	}
 
+	@Override
 	public void destroy() {
 	}
 

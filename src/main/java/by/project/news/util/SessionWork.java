@@ -19,12 +19,7 @@ public class SessionWork {
 	private final static String COMMAND_SAVE = "cmdSave";
 	private final static String PAGE = "page";
 
-	public static void validateSession(HttpSession session) throws IOException, UtilException {
-
-		if (session == null) {
-
-			throw new UtilException("Session is timeout :: swvs");
-		}
+	public static void validateSessionUser(HttpSession session) throws IOException, UtilException {
 
 		User user = (User) session.getAttribute(USER);
 
