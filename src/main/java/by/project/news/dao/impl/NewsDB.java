@@ -22,6 +22,8 @@ import by.project.news.dao.util.ConnectionPoolException;
 import by.project.news.util.BeanCreator;
 import by.project.news.util.CheckField;
 import by.project.news.util.NewsSQL;
+import by.project.news.util.SQLConAutoRollback;
+import by.project.news.util.SQLConSetAutoCommit;
 import by.project.news.util.SgnSQL;
 import by.project.news.util.UserSQL;
 import by.project.news.util.UtilException;
@@ -107,6 +109,8 @@ public class NewsDB implements NewsDAO {
 		final String sqlDelete = NewsSQL.SQL_DELETE_NEWS_ID.getSQL();
 
 		try (Connection con = ConnectionPool.getInstance().takeConnection();
+				SQLConSetAutoCommit conAutoCommit = new SQLConSetAutoCommit(con, false);
+				SQLConAutoRollback conAutoRollback = new SQLConAutoRollback(con);
 				PreparedStatement psSelect = con.prepareStatement(sqlSelect);
 				PreparedStatement psDelete = con.prepareStatement(sqlDelete);) {
 
@@ -124,6 +128,8 @@ public class NewsDB implements NewsDAO {
 			psDelete.setInt(1, rs.getInt(NewsSQL.SQL_COLUM_LABEL_ID.getSQL()));
 
 			psDelete.executeUpdate();
+
+			conAutoRollback.commit();
 
 		} catch (SQLException | ConnectionPoolException e) {
 
@@ -213,6 +219,7 @@ public class NewsDB implements NewsDAO {
 			}
 
 			throw new DAOException("Can't load newses for main page (sql) :: newsdaoload", e);
+
 		} catch (UtilException e) {
 
 			throw new DAOException(e);

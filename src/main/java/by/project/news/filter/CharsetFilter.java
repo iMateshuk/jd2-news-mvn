@@ -9,7 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 
-/*@WebFilter("/CharsetFilter")*/
+/*@WebFilter("filterName = /CharsetFilter", urlPatterns = "/Controller")*/
 public class CharsetFilter implements Filter {
 
 	private String encoding;

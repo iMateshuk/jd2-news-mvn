@@ -68,7 +68,10 @@ public class UserDB implements UserDAO {
 			ps.setString(4, userData.getAge());
 			ps.setString(5, userData.getLogin());
 
-			ps.executeUpdate();
+			if (ps.executeUpdate() != 1) {
+				
+				throw new DAOException("User data not update. Check user fields :: daoupdate");
+			}
 
 		} catch (SQLException | ConnectionPoolException e) {
 
