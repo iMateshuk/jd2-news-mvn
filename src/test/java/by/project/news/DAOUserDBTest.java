@@ -1,6 +1,7 @@
 package by.project.news;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import by.project.news.bean.User;
@@ -12,15 +13,33 @@ import by.project.news.util.Generator;
 
 public class DAOUserDBTest {
 
-	UserData userData = new UserData.UserDataBuilder().setLogin("test").setPassword(Generator.genStringHash("test"))
-			.setAge("45").setRole("user").build();
+	private final static String LOGIN = "test";
+	private final static String PASS = "test";
+	private final static String ROLE_USER = "user";
+	private final static String AGE = "45";
 
-	User user = new User.UserBuilder().setLogin("test").setRole("user").setAge("45").build();
+	private final static String LOGIN_WRONG = "!test!";
+	private final static String PASS_WRONG = "!test!";
 
-	UserData wrongUser = new UserData.UserDataBuilder().setLogin("!test!")
-			.setPassword(Generator.genStringHash("!test!")).build();
+	private String genPass = Generator.genStringHash(PASS);
+	private String genWrongPass = Generator.genStringHash(PASS_WRONG);
 
-	UserDAO userDAO = new UserDB();
+	private UserData userData;
+	private User user;
+	private UserData wrongUser;
+	private UserDAO userDAO;
+
+	@Before
+	public void setUp() {
+		userData = new UserData.UserDataBuilder().setLogin(LOGIN).setPassword(genPass).setAge(AGE).setRole(ROLE_USER)
+				.build();
+
+		user = new User.UserBuilder().setLogin(LOGIN).setRole(ROLE_USER).setAge(AGE).build();
+
+		wrongUser = new UserData.UserDataBuilder().setLogin(LOGIN_WRONG).setPassword(genWrongPass).build();
+
+		userDAO = new UserDB();
+	}
 
 	@Test
 	public void daoRegNewUserTest() throws DAOException {
@@ -47,7 +66,7 @@ public class DAOUserDBTest {
 
 		Assert.assertEquals(user, userDAO.authorization(userData));
 	}
-	
+
 	@Test(expected = DAOException.class)
 	public void daoAuthWrongUserTest() throws DAOException {
 
