@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class UserOperUpdate implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(UserOperUpdate.class);
 
 	private final static UserService userService = ServiceProvider.getInstance().getUserService();
@@ -38,19 +38,16 @@ public class UserOperUpdate implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT_SESSION = COMMAND.concat(commandAnswer).concat(ACTION)
-			.concat(commandUserUpdate).concat(MESSAGE);
-	private final static String REDIRECT = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandUserUpdate)
-			.concat(MESSAGE);
-	private final static String REDIRECT_SE = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandUserUpdate)
-			.concat(MESSAGE);
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
+	private final static String REDIRECT_SESSION = COMMAND + commandAnswer + ACTION + commandUserUpdate + MESSAGE;
+	private final static String REDIRECT = COMMAND + commandAnswer + ACTION + commandUserUpdate + MESSAGE;
+	private final static String REDIRECT_SE = COMMAND + commandAnswer + ACTION + commandUserUpdate + MESSAGE;
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		
+
 		try {
 
 			SessionWork.validateSessionUser(session);
@@ -58,7 +55,7 @@ public class UserOperUpdate implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 
@@ -70,23 +67,23 @@ public class UserOperUpdate implements Command {
 
 			if (!(user.getLogin().equals(userData.getLogin()) || user.getRole().equals(ROLE_ADMIN))) {
 
-				response.sendRedirect(REDIRECT_SESSION.concat("wronguserlogin"));
+				response.sendRedirect(REDIRECT_SESSION + "wronguserlogin");
 				return;
 			}
 
 			userService.update(userData);
 
-			response.sendRedirect(REDIRECT.concat("userdatasuccess"));
+			response.sendRedirect(REDIRECT + "userdatasuccess");
 
 		} catch (ServiceException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_SE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_SE + Parser.excRemovePath(e.getMessage()));
 
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

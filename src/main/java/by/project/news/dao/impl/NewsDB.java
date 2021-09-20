@@ -159,7 +159,7 @@ public class NewsDB implements NewsDAO {
 		try (Connection con = ConnectionPool.getInstance().takeConnection();
 				PreparedStatement ps = con.prepareStatement(sql);) {
 
-			ps.setString(1, STYLE_LIKE.concat(newsTitle).concat(STYLE_LIKE));
+			ps.setString(1, STYLE_LIKE + newsTitle + STYLE_LIKE);
 
 			int count = 2;
 

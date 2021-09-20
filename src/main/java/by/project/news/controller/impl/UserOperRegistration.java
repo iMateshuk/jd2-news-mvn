@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class UserOperRegistration implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(UserOperRegistration.class);
 
 	private final static UserService userService = ServiceProvider.getInstance().getUserService();
@@ -38,14 +38,11 @@ public class UserOperRegistration implements Command {
 	private final static String ACTION = "&action=";
 	private final static String NEW_USER = "&newuser=";
 
-	private final static String REDIRECT_SESSION = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandReg)
-			.concat(MESSAGE);
-	private final static String REDIRECT_USER = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandReg)
-			.concat(MESSAGE);
-	private final static String REDIRECT_USER_NEW = COMMAND.concat(commandAutho).concat(MESSAGE);
-	private final static String REDIRECT = COMMAND.concat(CommandName.INDEX.toString().toLowerCase());
-	private final static String REDIRECT_EX = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandReg)
-			.concat(MESSAGE);
+	private final static String REDIRECT_SESSION = COMMAND + commandAnswer + ACTION + commandReg + MESSAGE;
+	private final static String REDIRECT_USER = COMMAND + commandAnswer + ACTION + commandReg + MESSAGE;
+	private final static String REDIRECT_USER_NEW = COMMAND + commandAutho + MESSAGE;
+	private final static String REDIRECT = COMMAND + CommandName.INDEX.toString().toLowerCase();
+	private final static String REDIRECT_EX = COMMAND + commandAnswer + ACTION + commandReg + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,7 +51,7 @@ public class UserOperRegistration implements Command {
 
 		if (session == null) {
 
-			response.sendRedirect(REDIRECT_SESSION.concat("usersessiontimeout"));
+			response.sendRedirect(REDIRECT_SESSION + "usersessiontimeout");
 			return;
 		}
 
@@ -70,20 +67,20 @@ public class UserOperRegistration implements Command {
 
 			if (user != null && user.getRole().equals(ROLE_ADMIN)) {
 
-				redirect = REDIRECT_USER.concat("registrationsuccess");
+				redirect = REDIRECT_USER + "registrationsuccess";
 			} else {
 
-				redirect = REDIRECT_USER_NEW.concat("registrationsuccess").concat(NEW_USER).concat(userData.getLogin());
+				redirect = REDIRECT_USER_NEW + "registrationsuccess" + NEW_USER + userData.getLogin();
 			}
 
 		} catch (ServiceException e) {
 
 			log.error(e);
-			redirect = REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage()));
+			redirect = REDIRECT_EX + Parser.excRemovePath(e.getMessage());
 		} catch (UtilException e) {
 
 			log.error(e);
-			redirect = REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage()));
+			redirect = REDIRECT_EX + Parser.excRemovePath(e.getMessage());
 		}
 
 		response.sendRedirect(redirect);

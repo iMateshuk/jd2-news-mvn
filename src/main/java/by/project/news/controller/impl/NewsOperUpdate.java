@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 public class NewsOperUpdate implements Command {
 
 	private final static Logger log = LogManager.getLogger(NewsOperUpdate.class);
-	
+
 	private final static NewsService newsServices = ServiceProvider.getInstance().getNewsService();
 
 	private final static String commandAnswer = CommandName.NEWS_ANSWER.toString().toLowerCase();
@@ -36,16 +36,15 @@ public class NewsOperUpdate implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandUpdate);
-	private final static String REDIRECT_SE = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandUpdate)
-			.concat(MESSAGE);
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
+	private final static String REDIRECT = COMMAND + commandAnswer + ACTION + commandUpdate;
+	private final static String REDIRECT_SE = COMMAND + commandAnswer + ACTION + commandUpdate + MESSAGE;
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		
+
 		try {
 
 			SessionWork.validateSessionUser(session);
@@ -53,7 +52,7 @@ public class NewsOperUpdate implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 
@@ -64,7 +63,7 @@ public class NewsOperUpdate implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 		}
 
 		try {
@@ -76,12 +75,12 @@ public class NewsOperUpdate implements Command {
 		} catch (ServiceException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_SE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_SE + Parser.excRemovePath(e.getMessage()));
 
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

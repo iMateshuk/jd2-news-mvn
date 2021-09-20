@@ -3,7 +3,7 @@
 
   <Properties>
   
-    <Property name="filename">logs/NewsApp.log</Property>
+    <Property name="filename">./logs/NewsApp.log</Property>
     <Property name="basePatterLayout">%d{ISO8601} [%-5p] (%F:%L) - %m%n</Property>
     <Property name="filePatterLayout">%d{yyyy.MM.dd HH:mm:ss} [%-5p] [%t] %logger{36} (%F:%L) - %m%n</Property>
     

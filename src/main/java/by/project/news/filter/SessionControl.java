@@ -24,14 +24,14 @@ public class SessionControl implements Filter {
 	private final static Logger log = LogManager.getLogger(GoToUserDeletePage.class);
 
 	private final static String commandAnswer = CommandName.USER_ANSWER.toString().toLowerCase();
-	
+
 	private final static String COMMAND = "Controller?command=";
 
 	private final static String MESSAGE = "&message=";
-	
+
 	private final static String MESSAGE_INFO = "swvs";
 
-	private final static String REDIRECT = COMMAND.concat(commandAnswer).concat(MESSAGE).concat(MESSAGE_INFO);
+	private final static String REDIRECT = COMMAND + commandAnswer + MESSAGE + MESSAGE_INFO;
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {

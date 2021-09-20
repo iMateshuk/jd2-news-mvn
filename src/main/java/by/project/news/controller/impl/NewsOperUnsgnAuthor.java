@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class NewsOperUnsgnAuthor implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(NewsOperUnsgnAuthor.class);
 
 	private final static NewsService newsServices = ServiceProvider.getInstance().getNewsService();
@@ -36,10 +36,9 @@ public class NewsOperUnsgnAuthor implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandUnsgn);
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
-	private final static String REDIRECT_EX = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandUnsgn)
-			.concat(MESSAGE);
+	private final static String REDIRECT = COMMAND + commandAnswer + ACTION + commandUnsgn;
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
+	private final static String REDIRECT_EX = COMMAND + commandAnswer + ACTION + commandUnsgn + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +52,7 @@ public class NewsOperUnsgnAuthor implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 
@@ -66,11 +65,11 @@ public class NewsOperUnsgnAuthor implements Command {
 		} catch (ServiceException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

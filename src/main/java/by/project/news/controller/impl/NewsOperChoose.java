@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpSession;
 public class NewsOperChoose implements Command {
 
 	private final static Logger log = LogManager.getLogger(NewsOperChoose.class);
-	
+
 	private final static NewsService newsServices = ServiceProvider.getInstance().getNewsService();
 
 	private final static String commandAnswer = CommandName.NEWS_ANSWER.toString().toLowerCase();
@@ -34,7 +34,7 @@ public class NewsOperChoose implements Command {
 	private final static String commandMain = CommandName.MAIN.toString().toLowerCase();
 	private final static String commandAuth = CommandName.USER_AUTHORIZATION.toString().toLowerCase();
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(commandMain).concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + commandMain + ".jsp";
 
 	private final static String CLEAN = "clean";
 	private final static String USER = "user";
@@ -47,9 +47,8 @@ public class NewsOperChoose implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT_SE = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandChoose)
-			.concat(MESSAGE);
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
+	private final static String REDIRECT_SE = COMMAND + commandAnswer + ACTION + commandChoose + MESSAGE;
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -63,7 +62,7 @@ public class NewsOperChoose implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 
@@ -98,12 +97,12 @@ public class NewsOperChoose implements Command {
 
 			log.error(e);
 			SessionWork.cleanAttributes(session);
-			response.sendRedirect(REDIRECT_SE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_SE + Parser.excRemovePath(e.getMessage()));
 
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

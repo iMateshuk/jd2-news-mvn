@@ -18,6 +18,6 @@ public class ChangeLocal implements Command {
 
 		Local.change(request);
 
-		response.sendRedirect(CONTROLLER.concat((String) request.getSession(false).getAttribute(URL)));
+		response.sendRedirect(CONTROLLER + (String) request.getSession(false).getAttribute(URL));
 	}
 }

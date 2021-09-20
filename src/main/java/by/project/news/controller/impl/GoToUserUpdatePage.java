@@ -21,11 +21,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class GoToUserUpdatePage implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(GoToUserUpdatePage.class);
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(CommandName.USER_TOOLS_UPDATE.toString().toLowerCase())
-			.concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + CommandName.USER_TOOLS_UPDATE.toString().toLowerCase()
+			+ ".jsp";
 
 	private final static UserService userService = ServiceProvider.getInstance().getUserService();
 
@@ -41,15 +41,14 @@ public class GoToUserUpdatePage implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT_SE = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandUserUpdate)
-			.concat(MESSAGE);
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
+	private final static String REDIRECT_SE = COMMAND + commandAnswer + ACTION + commandUserUpdate + MESSAGE;
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		
+
 		try {
 
 			SessionWork.validateSessionUser(session);
@@ -67,12 +66,12 @@ public class GoToUserUpdatePage implements Command {
 		} catch (ServiceException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_SE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_SE + Parser.excRemovePath(e.getMessage()));
 
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

@@ -14,7 +14,8 @@ public class ControllerListener implements ServletRequestListener {
 
 		HttpServletRequest request = (HttpServletRequest) arg0.getServletRequest();
 
-		System.out.println("Request from " + request.getContextPath() + " was destroyed. Remote IP="+request.getRemoteAddr());
+		System.out.println(
+				"Request from " + request.getContextPath() + " was destroyed. Remote IP=" + request.getRemoteAddr());
 
 	}
 
@@ -23,7 +24,8 @@ public class ControllerListener implements ServletRequestListener {
 
 		HttpServletRequest request = (HttpServletRequest) arg0.getServletRequest();
 
-		System.out.println("Request from " + request.getContextPath() + " was created. Remote IP="+request.getRemoteAddr());
+		System.out.println(
+				"Request from " + request.getContextPath() + " was created. Remote IP=" + request.getRemoteAddr());
 
 	}
 

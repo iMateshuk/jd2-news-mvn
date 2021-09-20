@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 			String value = userData.getName();
 
 			if (!CheckField.thisValueNull(value)) {
-				
+
 				CheckField.checkValueExpression(value, EXP_SYMBOLS);
 				CheckField.checkValueLengthMin(value, FIELD_LENGHT);
 			}

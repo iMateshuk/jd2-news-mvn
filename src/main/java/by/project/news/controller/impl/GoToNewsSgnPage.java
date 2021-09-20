@@ -21,13 +21,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class GoToNewsSgnPage implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(GoToNewsSgnPage.class);
 
 	private final static UserService userService = ServiceProvider.getInstance().getUserService();
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(CommandName.NEWS_TOOLS_SGN.toString().toLowerCase())
-			.concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + CommandName.NEWS_TOOLS_SGN.toString().toLowerCase() + ".jsp";
 
 	private final static String USER = "user";
 	private final static String ATTRIBUTE_USER_SGN = "userSgn";
@@ -40,9 +39,8 @@ public class GoToNewsSgnPage implements Command {
 	private final static String commandSgn = CommandName.NEWS_TOOLS_SGN.toString().toLowerCase();
 	private final static String commandAnswer = CommandName.NEWS_ANSWER.toString().toLowerCase();
 
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
-	private final static String REDIRECT_SE = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandSgn)
-			.concat(MESSAGE);
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
+	private final static String REDIRECT_SE = COMMAND + commandAnswer + ACTION + commandSgn + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,11 +59,11 @@ public class GoToNewsSgnPage implements Command {
 		} catch (ServiceException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_SE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_SE + Parser.excRemovePath(e.getMessage()));
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

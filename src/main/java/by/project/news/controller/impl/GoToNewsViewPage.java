@@ -21,11 +21,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class GoToNewsViewPage implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(GoToNewsViewPage.class);
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(CommandName.NEWS_VIEW.toString().toLowerCase())
-			.concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + CommandName.NEWS_VIEW.toString().toLowerCase() + ".jsp";
 
 	private final static NewsService newsServices = ServiceProvider.getInstance().getNewsService();
 
@@ -40,11 +39,10 @@ public class GoToNewsViewPage implements Command {
 	private final static String commandView = CommandName.NEWS_VIEW.toString().toLowerCase();
 	private final static String commandAuth = CommandName.USER_AUTHORIZATION.toString().toLowerCase();
 
-	private final static String REDIRECT_ERROR = COMMAND.concat(commandAnswer).concat(MESSAGE);
-	private final static String REDIRECT_SE = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandView)
-			.concat(MESSAGE);
+	private final static String REDIRECT_ERROR = COMMAND + commandAnswer + MESSAGE;
+	private final static String REDIRECT_SE = COMMAND + commandAnswer + ACTION + commandView + MESSAGE;
 
-	private final static String REDIRECT_SESSION = COMMAND.concat(commandAuth).concat(MESSAGE);
+	private final static String REDIRECT_SESSION = COMMAND + commandAuth + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,7 +56,7 @@ public class GoToNewsViewPage implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_SESSION.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_SESSION + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 
@@ -74,7 +72,7 @@ public class GoToNewsViewPage implements Command {
 
 		if (title == null) {
 
-			response.sendRedirect(REDIRECT_ERROR.concat("commonerror"));
+			response.sendRedirect(REDIRECT_ERROR + "commonerror");
 			return;
 		}
 
@@ -89,7 +87,7 @@ public class GoToNewsViewPage implements Command {
 		} catch (ServiceException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_SE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_SE + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

@@ -21,9 +21,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class UserOperAuthorization implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(UserOperAuthorization.class);
-	
+
 	private final static UserService userService = ServiceProvider.getInstance().getUserService();
 
 	private final static String commandAnswer = CommandName.USER_ANSWER.toString().toLowerCase();
@@ -35,13 +35,10 @@ public class UserOperAuthorization implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT_SESSION = COMMAND.concat(commandAutho).concat(ACTION).concat(commandAutho)
-			.concat(MESSAGE);
-	private final static String REDIRECT_USER = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandAutho)
-			.concat(MESSAGE);
-	private final static String REDIRECT = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandAutho);
-	private final static String REDIRECT_EX = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandAutho)
-			.concat(MESSAGE);
+	private final static String REDIRECT_SESSION = COMMAND + commandAutho + ACTION + commandAutho + MESSAGE;
+	private final static String REDIRECT_USER = COMMAND + commandAnswer + ACTION + commandAutho + MESSAGE;
+	private final static String REDIRECT = COMMAND + commandAnswer + ACTION + commandAutho;
+	private final static String REDIRECT_EX = COMMAND + commandAnswer + ACTION + commandAutho + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +47,7 @@ public class UserOperAuthorization implements Command {
 
 		if (session == null) {
 
-			response.sendRedirect(REDIRECT_SESSION.concat("usersessiontimeout"));
+			response.sendRedirect(REDIRECT_SESSION + "usersessiontimeout");
 			return;
 		}
 
@@ -58,7 +55,7 @@ public class UserOperAuthorization implements Command {
 
 		if (user != null) {
 
-			response.sendRedirect(REDIRECT_USER.concat("userloggedin"));
+			response.sendRedirect(REDIRECT_USER + "userloggedin");
 			return;
 		}
 
@@ -75,14 +72,14 @@ public class UserOperAuthorization implements Command {
 			response.sendRedirect(REDIRECT);
 
 		} catch (ServiceException e) {
-			
+
 			log.error(e);
-			response.sendRedirect(REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

@@ -16,18 +16,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToNewsAddPage implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(GoToNewsAddPage.class);
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(CommandName.NEWS_TOOLS_ADD.toString().toLowerCase())
-			.concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + CommandName.NEWS_TOOLS_ADD.toString().toLowerCase() + ".jsp";
 
 	private final static String COMMAND = "Controller?command=";
 	private final static String MESSAGE = "&message=";
 
 	private final static String commandAuth = CommandName.USER_AUTHORIZATION.toString().toLowerCase();
 
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +38,7 @@ public class GoToNewsAddPage implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 

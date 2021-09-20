@@ -19,7 +19,7 @@ public class CheckField {
 
 		return (value == null || value.isEmpty() || value.isBlank());
 	}
-	
+
 	public static void checkValueNull(Integer value) throws UtilException {
 
 		if (thisValueNull(value)) {
@@ -27,7 +27,7 @@ public class CheckField {
 			throw new UtilException("Integer is null :: cvn");
 		}
 	}
-	
+
 	public static boolean thisValueNull(Integer value) {
 
 		return (value == null);
@@ -37,7 +37,7 @@ public class CheckField {
 
 		if (value.matches(expression)) {
 
-			throw new UtilException(value + " match the expression " + expression +" :: cve");
+			throw new UtilException(value + " match the expression " + expression + " :: cve");
 		}
 
 	}
@@ -46,7 +46,7 @@ public class CheckField {
 
 		if (!value.matches(expression)) {
 
-			throw new UtilException(value + " not match the expression " + expression +" :: cvne");
+			throw new UtilException(value + " not match the expression " + expression + " :: cvne");
 		}
 
 	}
@@ -96,7 +96,7 @@ public class CheckField {
 		return age.compareTo(AGE_STRING) < 0;
 	}
 
-	public static void checkListNullEmp(List<?> list) throws UtilException{
+	public static void checkListNullEmp(List<?> list) throws UtilException {
 
 		if (list == null || list.isEmpty()) {
 

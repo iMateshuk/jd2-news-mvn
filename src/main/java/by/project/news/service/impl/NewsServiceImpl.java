@@ -28,7 +28,7 @@ public class NewsServiceImpl implements NewsService {
 	private static final String EXP_TITLE = ".*\\*+.*";
 
 	private static final String EMPTY = "";
-	
+
 	private static final int TITLE_LENGHT = 2;
 	private static final int FIELD_LENGHT = 3;
 	private static final int AUTHOR_LOGIN_LENGHT = 3;
@@ -207,7 +207,7 @@ public class NewsServiceImpl implements NewsService {
 	public NewsData sgnAuthorView(User user, NewsData newsData) throws ServiceException {
 
 		try {
-			
+
 			CheckField.checkValueNull(newsData.getPage());
 
 			return newsDAO.sgnAuthorView(user, newsData);

@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class NewsOperSgnView implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(NewsOperSgnView.class);
 
 	private final static NewsService newsServices = ServiceProvider.getInstance().getNewsService();
@@ -32,7 +32,7 @@ public class NewsOperSgnView implements Command {
 	private final static String commandMain = CommandName.MAIN.toString().toLowerCase();
 	private final static String commandAuth = CommandName.USER_AUTHORIZATION.toString().toLowerCase();
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(commandMain).concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + commandMain + ".jsp";
 
 	private final static String CLEAN = "clean";
 	private final static String USER = "user";
@@ -43,9 +43,8 @@ public class NewsOperSgnView implements Command {
 
 	private final static String COMMAND_SAVE = "cmdSave";
 
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
-	private final static String REDIRECT_EX = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandSgn)
-			.concat(MESSAGE);
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
+	private final static String REDIRECT_EX = COMMAND + commandAnswer + ACTION + commandSgn + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,7 +58,7 @@ public class NewsOperSgnView implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 
@@ -69,7 +68,7 @@ public class NewsOperSgnView implements Command {
 		}
 
 		try {
-			
+
 			NewsData newsData = newsServices.sgnAuthorView((User) session.getAttribute(USER),
 					new NewsData.NewsDataBuilder().setPage(SessionWork.takePage(request, session)).build());
 
@@ -84,7 +83,7 @@ public class NewsOperSgnView implements Command {
 
 			log.error(e);
 			SessionWork.cleanAttributes(session);
-			response.sendRedirect(REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

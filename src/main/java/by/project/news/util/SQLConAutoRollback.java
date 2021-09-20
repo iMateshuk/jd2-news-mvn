@@ -9,10 +9,12 @@ public class SQLConAutoRollback implements AutoCloseable {
 	private boolean committed;
 
 	public SQLConAutoRollback(Connection con) throws SQLException {
+		
 		this.con = con;
 	}
 
 	public void commit() throws SQLException {
+		
 		con.commit();
 		committed = true;
 	}

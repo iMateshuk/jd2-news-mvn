@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class NewsOperDelete implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(NewsOperDelete.class);
 
 	private final static NewsService newsServices = ServiceProvider.getInstance().getNewsService();
@@ -34,16 +34,15 @@ public class NewsOperDelete implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandDelete);
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
-	private final static String REDIRECT_EX = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandDelete)
-			.concat(MESSAGE);
+	private final static String REDIRECT = COMMAND + commandAnswer + ACTION + commandDelete;
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
+	private final static String REDIRECT_EX = COMMAND + commandAnswer + ACTION + commandDelete + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		
+
 		try {
 
 			SessionWork.validateSessionUser(session);
@@ -51,7 +50,7 @@ public class NewsOperDelete implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 
@@ -62,7 +61,7 @@ public class NewsOperDelete implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 		}
 
 		try {
@@ -77,12 +76,12 @@ public class NewsOperDelete implements Command {
 
 			log.error(e);
 
-			response.sendRedirect(REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

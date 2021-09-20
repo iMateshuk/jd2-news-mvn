@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToRegistrationPage implements Command {
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(CommandName.USER_REGISTRATION.toString().toLowerCase())
-			.concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + CommandName.USER_REGISTRATION.toString().toLowerCase()
+			+ ".jsp";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -26,7 +26,7 @@ public class GoToMainPage implements Command {
 
 	private final static String COMMAND = CommandName.MAIN.toString().toLowerCase();
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(COMMAND).concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + COMMAND + ".jsp";
 	private final static NewsService newsService = ServiceProvider.getInstance().getNewsService();
 
 	private final static String CLEAN = "clean";
@@ -52,7 +52,7 @@ public class GoToMainPage implements Command {
 
 		if (session.getAttribute(COMMAND_SAVE) != null) {
 
-			response.sendRedirect(REDIRECT_CMD.concat((String) session.getAttribute(COMMAND_SAVE)));
+			response.sendRedirect(REDIRECT_CMD + (String) session.getAttribute(COMMAND_SAVE));
 			return;
 		}
 

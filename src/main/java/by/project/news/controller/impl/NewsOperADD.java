@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class NewsOperADD implements Command {
-	
+
 	private final static Logger log = LogManager.getLogger(NewsOperADD.class);
 
 	private final static NewsService newsServices = ServiceProvider.getInstance().getNewsService();
@@ -36,10 +36,9 @@ public class NewsOperADD implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandADD);
-	private final static String REDIRECT_UE = COMMAND.concat(commandAuth).concat(MESSAGE);
-	private final static String REDIRECT_EX = COMMAND.concat(commandAnswer).concat(ACTION).concat(commandADD)
-			.concat(MESSAGE);
+	private final static String REDIRECT = COMMAND + commandAnswer + ACTION + commandADD;
+	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
+	private final static String REDIRECT_EX = COMMAND + commandAnswer + ACTION + commandADD + MESSAGE;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +52,7 @@ public class NewsOperADD implements Command {
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_UE.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
 			return;
 		}
 
@@ -68,11 +67,11 @@ public class NewsOperADD implements Command {
 		} catch (ServiceException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 		} catch (UtilException e) {
 
 			log.error(e);
-			response.sendRedirect(REDIRECT_EX.concat(Parser.excRemovePath(e.getMessage())));
+			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 		}
 
 	}

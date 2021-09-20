@@ -19,7 +19,7 @@ public class Local {
 	}
 
 	public static void change(HttpServletRequest request) {
-		
+
 		String local = request.getParameter(LOCAL);
 
 		if (local != null) {

@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToAuthorizationPage implements Command {
 
-	private final static String PATH = "/WEB-INF/jsp/".concat(CommandName.USER_AUTHORIZATION.toString().toLowerCase())
-			.concat(".jsp");
+	private final static String PATH = "/WEB-INF/jsp/" + CommandName.USER_AUTHORIZATION.toString().toLowerCase()
+			+ ".jsp";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
