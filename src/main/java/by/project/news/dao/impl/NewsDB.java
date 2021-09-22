@@ -19,13 +19,13 @@ import by.project.news.dao.DAOException;
 import by.project.news.dao.NewsDAO;
 import by.project.news.dao.util.ConnectionPool;
 import by.project.news.dao.util.ConnectionPoolException;
+import by.project.news.dao.util.NewsSQL;
 import by.project.news.dao.util.SQLConAutoRollback;
 import by.project.news.dao.util.SQLConSetAutoCommit;
+import by.project.news.dao.util.SgnSQL;
+import by.project.news.dao.util.UserSQL;
 import by.project.news.util.BeanCreator;
 import by.project.news.util.CheckField;
-import by.project.news.util.NewsSQL;
-import by.project.news.util.SgnSQL;
-import by.project.news.util.UserSQL;
 import by.project.news.util.UtilException;
 
 public class NewsDB implements NewsDAO {

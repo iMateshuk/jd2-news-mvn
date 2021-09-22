@@ -18,10 +18,12 @@ public class UserServiceImpl implements UserService {
 	private static final DAOProvider provider = DAOProvider.getInstance();
 
 	private static final UserDAO userDAO = provider.getUserDAO();
-
+	
 	private static final String EXP_SYMBOLS = ".*\\W+.*";
 	private static final String EXP_EMAIL = "[\\w_+-\\.]+@[\\w-\\.]+\\.[a-zA-Z]{2,4}";
 
+	private static final String ROLE_ADMIN = "admin";
+	private static final int PASSWORD_MIN_LENGHT = 8;
 	private static final int FIELD_LENGHT = 3;
 	private static final int AGE_MIN_LENGHT = 1;
 	private static final int AGE_MAX_LENGHT = 3;
@@ -101,20 +103,25 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void password(UserData userData) throws ServiceException {
+	public void password(User user, UserData userData) throws ServiceException {
 
 		try {
 
 			String newPass = userData.getPassword();
-			String oldPass = userData.getOldPassword();
 
-			CheckField.checkValueNull(oldPass);
 			CheckField.checkValueNull(newPass);
 
-			CheckField.checkValueLengthMin(newPass, 8);
+			CheckField.checkValueLengthMin(newPass, PASSWORD_MIN_LENGHT);
 
-			userData.setOldPassword(Generator.genStringHash(oldPass));
 			userData.setPassword(Generator.genStringHash(newPass));
+			
+			if (!user.getRole().equals(ROLE_ADMIN)) {
+				
+				String oldPass = userData.getOldPassword();
+
+				CheckField.checkValueNull(oldPass);
+				userData.setOldPassword(Generator.genStringHash(oldPass));
+			}
 
 			userDAO.password(userData);
 

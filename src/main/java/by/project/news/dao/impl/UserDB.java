@@ -16,8 +16,9 @@ import by.project.news.dao.DAOException;
 import by.project.news.dao.UserDAO;
 import by.project.news.dao.util.ConnectionPool;
 import by.project.news.dao.util.ConnectionPoolException;
+import by.project.news.dao.util.UserSQL;
 import by.project.news.util.BeanCreator;
-import by.project.news.util.UserSQL;
+import by.project.news.util.CheckField;
 import by.project.news.util.UtilException;
 
 public class UserDB implements UserDAO {
@@ -117,7 +118,7 @@ public class UserDB implements UserDAO {
 	@Override
 	public User authorization(UserData userData) throws DAOException {
 
-		final String sql = UserSQL.SQL_SELECT_ALL_W_LOGIN__A_PASSWORD.getSQL();
+		final String sql = UserSQL.SQL_SELECT_ALL_W_LOGIN_A_PASSWORD.getSQL();
 
 		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
@@ -128,7 +129,7 @@ public class UserDB implements UserDAO {
 
 			if (!rs.next()) {
 
-				throw new DAOException("Can't auth user. Not exist :: userdaoauthorizationrs");
+				throw new DAOException("Can't auth user. Check data fields :: userdaoauthorizationrs");
 			}
 
 			return BeanCreator.createUser(rs);
@@ -153,17 +154,28 @@ public class UserDB implements UserDAO {
 	@Override
 	public void password(UserData userData) throws DAOException {
 
-		final String sql = UserSQL.SQL_UPDATE_PASSWORD_SELECT_LOGIN_OLDPASS.getSQL();
+		final String oldPassword = userData.getOldPassword();
+
+		final boolean checkOldPass = CheckField.thisValueNull(oldPassword);
+
+		final String sql = checkOldPass ? UserSQL.SQL_UPDATE_PASSWORD.getSQL()
+				: UserSQL.SQL_UPDATE_PASSWORD_SELECT_LOGIN_OLDPASS.getSQL();
 
 		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userData.getLogin());
-			ps.setString(2, userData.getOldPassword());
-			ps.setString(3, userData.getPassword());
+
+			int count = 2;
+			if (!checkOldPass) {
+
+				ps.setString(count++, oldPassword);
+			}
+
+			ps.setString(count, userData.getPassword());
 
 			if (ps.executeUpdate() != 1) {
 
-				throw new DAOException("Can't change password. Check Login and oldPass :: userdaopassword");
+				throw new DAOException("Can't change password. Check fields :: userdaopassword");
 			}
 
 		} catch (SQLException | ConnectionPoolException e) {

@@ -13,7 +13,7 @@ public interface UserService {
 
 	void delete(UserData userData) throws ServiceException;
 	
-	void password(UserData userData) throws ServiceException;
+	void password(User user, UserData userData) throws ServiceException;
 	
 	User authorization(UserData userData) throws ServiceException;
 	

@@ -71,7 +71,7 @@ public class UserOperPassword implements Command {
 				return;
 			}
 
-			userService.password(userData);
+			userService.password(user, userData);
 
 			response.sendRedirect(REDIRECT + "userpasswordsuccess");
 

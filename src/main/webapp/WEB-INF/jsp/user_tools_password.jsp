@@ -66,10 +66,12 @@
 					<input type="text" name="login" value="" />
 				<br />
 				
-				${oldpassword_text}<em>*</em>:
-				<br />
-				<input type="password" name="oldpassword" value="" />
-				<br />
+				<c:if test="${user != null && user.getRole() != 'admin'}">
+					${oldpassword_text}<em>*</em>:
+					<br />
+					<input type="password" name="oldpassword" value="" />
+					<br />
+				</c:if>
 
 				${password_text}<em>*</em>:
 				<br />
