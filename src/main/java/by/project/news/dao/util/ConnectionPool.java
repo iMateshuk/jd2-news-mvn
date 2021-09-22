@@ -69,7 +69,7 @@ public class ConnectionPool {
 
 		} catch (ConnectionPoolException e) {
 
-			throw new RuntimeException(e.getMessage(), e);
+			throw new RuntimeException("ConnectionPoolException :: initPool", e);
 		}
 	}
 
@@ -91,9 +91,9 @@ public class ConnectionPool {
 
 				Connection connection = DriverManager.getConnection(url, user, password);
 
-				PooledConnection poledConnection = new PooledConnection(connection);
+				PooledConnection pooledConnection = new PooledConnection(connection);
 
-				connectionQueue.add(poledConnection);
+				connectionQueue.add(pooledConnection);
 			}
 
 		} catch (SQLException e) {

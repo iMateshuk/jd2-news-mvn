@@ -24,13 +24,14 @@ public class UserDB implements UserDAO {
 
 	private final static Logger log = LogManager.getLogger(UserDB.class);
 
+	private final static ConnectionPool CON_POOL = ConnectionPool.getInstance();
+
 	@Override
 	public void registration(UserData userData) throws DAOException {
 
 		final String sql = UserSQL.SQL_INSERT_USER.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userData.getName());
 			ps.setString(2, userData.getLogin());
@@ -59,8 +60,7 @@ public class UserDB implements UserDAO {
 
 		final String sql = UserSQL.SQL_UPDATE_USER_DATA_IF_NOT_NULL_EMPTY.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userData.getName());
 			ps.setString(2, userData.getEmail());
@@ -69,7 +69,7 @@ public class UserDB implements UserDAO {
 			ps.setString(5, userData.getLogin());
 
 			if (ps.executeUpdate() != 1) {
-				
+
 				throw new DAOException("User data not update. Check user fields :: daoupdate");
 			}
 
@@ -91,8 +91,7 @@ public class UserDB implements UserDAO {
 
 		final String sql = UserSQL.SQL_DELETE_LOGIN.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userData.getLogin());
 
@@ -120,8 +119,7 @@ public class UserDB implements UserDAO {
 
 		final String sql = UserSQL.SQL_SELECT_ALL_W_LOGIN__A_PASSWORD.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userData.getLogin());
 			ps.setString(2, userData.getPassword());
@@ -157,8 +155,7 @@ public class UserDB implements UserDAO {
 
 		final String sql = UserSQL.SQL_UPDATE_PASSWORD_SELECT_LOGIN_OLDPASS.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userData.getLogin());
 			ps.setString(2, userData.getOldPassword());
@@ -187,8 +184,7 @@ public class UserDB implements UserDAO {
 
 		final String sql = UserSQL.SQL_SELECT_NAME_EMAIL_W_LOGIN.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, user.getLogin());
 
@@ -219,8 +215,7 @@ public class UserDB implements UserDAO {
 
 		final String sql = UserSQL.SQL_SELECT_NAME_LOGIN_W_ID_S_LOGIN.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, user.getLogin());
 

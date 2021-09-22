@@ -19,11 +19,11 @@ import by.project.news.dao.DAOException;
 import by.project.news.dao.NewsDAO;
 import by.project.news.dao.util.ConnectionPool;
 import by.project.news.dao.util.ConnectionPoolException;
+import by.project.news.dao.util.SQLConAutoRollback;
+import by.project.news.dao.util.SQLConSetAutoCommit;
 import by.project.news.util.BeanCreator;
 import by.project.news.util.CheckField;
 import by.project.news.util.NewsSQL;
-import by.project.news.util.SQLConAutoRollback;
-import by.project.news.util.SQLConSetAutoCommit;
 import by.project.news.util.SgnSQL;
 import by.project.news.util.UserSQL;
 import by.project.news.util.UtilException;
@@ -31,6 +31,8 @@ import by.project.news.util.UtilException;
 public class NewsDB implements NewsDAO {
 
 	private final static Logger log = LogManager.getLogger(NewsDB.class);
+
+	private final static ConnectionPool CON_POOL = ConnectionPool.getInstance();
 
 	private static final String STYLE_LIKE = "%";
 
@@ -41,8 +43,7 @@ public class NewsDB implements NewsDAO {
 
 		final String sql = NewsSQL.SQL_INSERT_NEWS_W_LOGIN.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, news.getTitle());
 			ps.setString(2, news.getBrief());
@@ -74,8 +75,7 @@ public class NewsDB implements NewsDAO {
 
 		final String sql = NewsSQL.SQL_UPDATE_NEWS_W_TITLE.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, news.getTitle());
 			ps.setString(2, news.getBrief());
@@ -108,7 +108,7 @@ public class NewsDB implements NewsDAO {
 		final String sqlSelect = NewsSQL.SQL_SELECT_TITLE_ID_W_TITLE.getSQL();
 		final String sqlDelete = NewsSQL.SQL_DELETE_NEWS_ID.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
+		try (Connection con = CON_POOL.takeConnection();
 				SQLConSetAutoCommit conAutoCommit = new SQLConSetAutoCommit(con, false);
 				SQLConAutoRollback conAutoRollback = new SQLConAutoRollback(con);
 				PreparedStatement psSelect = con.prepareStatement(sqlSelect);
@@ -156,8 +156,7 @@ public class NewsDB implements NewsDAO {
 
 		newsData.setRecordsPerPage(RECORDS_PER_PAGE);
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, STYLE_LIKE + newsTitle + STYLE_LIKE);
 
@@ -207,9 +206,9 @@ public class NewsDB implements NewsDAO {
 
 		final String sql = NewsSQL.SQL_SELECT_ALL_FOR_LOAD.getSQL();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection()) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
-			return newsCreator(con.createStatement().executeQuery(sql));
+			return newsCreator(ps.executeQuery(sql));
 
 		} catch (SQLException | ConnectionPoolException e) {
 
@@ -234,8 +233,7 @@ public class NewsDB implements NewsDAO {
 
 		final String newsTitle = news.getTitle();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, newsTitle);
 
@@ -273,8 +271,7 @@ public class NewsDB implements NewsDAO {
 		final String newsTitle = news.getTitle();
 		final String userLogin = user.getLogin();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userLogin);
 			ps.setString(2, newsTitle);
@@ -307,7 +304,7 @@ public class NewsDB implements NewsDAO {
 		final String userLogin = user.getLogin();
 		final String authorLogin = author.getLogin();
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
+		try (Connection con = CON_POOL.takeConnection();
 				PreparedStatement psIds = con.prepareStatement(sqlIds);
 				PreparedStatement psUnsgn = con.prepareStatement(sqlUnsgn);) {
 
@@ -353,8 +350,7 @@ public class NewsDB implements NewsDAO {
 
 		newsData.setRecordsPerPage(RECORDS_PER_PAGE);
 
-		try (Connection con = ConnectionPool.getInstance().takeConnection();
-				PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userLogin);
 			ps.setInt(2, (newsData.getPage() - 1) * RECORDS_PER_PAGE);

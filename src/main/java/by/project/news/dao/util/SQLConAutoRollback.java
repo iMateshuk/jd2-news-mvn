@@ -1,4 +1,4 @@
-package by.project.news.util;
+package by.project.news.dao.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;
