@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,7 +15,7 @@
 
 <body>
 
-	<c:set var="local" value="en" scope="session"/>
+	<%-- <c:set var="local" value="en" scope="session"/> --%>
 
 	<c:redirect url ="Controller?command=main"></c:redirect>
 <%-- 	<%

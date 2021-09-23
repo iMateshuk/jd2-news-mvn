@@ -1,6 +1,5 @@
 package by.project.news.filter;
 
-
 import java.io.IOException;
 
 import by.project.news.controller.CommandName;
@@ -25,7 +24,7 @@ public class LastCommand implements Filter {
 			throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
-		
+
 		HttpSession session = req.getSession(false);
 
 		if (session == null) {
