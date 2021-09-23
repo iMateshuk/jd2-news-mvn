@@ -29,11 +29,11 @@ public class SessionWork {
 		}
 	}
 
-	public static void validateRoleUser(HttpSession session) throws IOException, UtilException {
+	public static void validateRoleUser(HttpSession session, UserRole userRole) throws IOException, UtilException {
 
 		User user = (User) session.getAttribute(USER);
 
-		if (user.getRole().equals(USER)) {
+		if (!user.getRole().equals(userRole.getRole())) {
 
 			throw new UtilException("User has wrong role :: swvru");
 		}

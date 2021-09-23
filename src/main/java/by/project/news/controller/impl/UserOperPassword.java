@@ -14,6 +14,7 @@ import by.project.news.service.ServiceProvider;
 import by.project.news.service.UserService;
 import by.project.news.util.BeanCreator;
 import by.project.news.util.SessionWork;
+import by.project.news.util.UserRole;
 import by.project.news.util.Parser;
 import by.project.news.util.UtilException;
 import jakarta.servlet.ServletException;
@@ -32,7 +33,6 @@ public class UserOperPassword implements Command {
 	private final static String commandAuth = CommandName.USER_AUTHORIZATION.toString().toLowerCase();
 
 	private final static String ATTRIBUTE_USER = "user";
-	private final static String ROLE_ADMIN = "admin";
 
 	private final static String COMMAND = "Controller?command=";
 	private final static String MESSAGE = "&message=";
@@ -65,7 +65,8 @@ public class UserOperPassword implements Command {
 
 			UserData userData = BeanCreator.createUserData(request);
 
-			if (!(user.getLogin().equals(userData.getLogin()) || user.getRole().equals(ROLE_ADMIN))) {
+			if (!(user.getLogin().equals(userData.getLogin())
+					|| user.getRole().equals(UserRole.ROLE_ADMIN.getRole()))) {
 
 				response.sendRedirect(REDIRECT_USER + "wronguserlogin");
 				return;

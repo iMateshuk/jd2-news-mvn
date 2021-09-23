@@ -13,6 +13,7 @@ import by.project.news.service.ServiceException;
 import by.project.news.service.ServiceProvider;
 import by.project.news.util.BeanCreator;
 import by.project.news.util.SessionWork;
+import by.project.news.util.UserRole;
 import by.project.news.util.Parser;
 import by.project.news.util.UtilException;
 import jakarta.servlet.ServletException;
@@ -56,7 +57,7 @@ public class NewsOperDelete implements Command {
 
 		try {
 
-			SessionWork.validateRoleUser(session);
+			SessionWork.validateRoleUser(session, UserRole.ROLE_ADMIN);
 
 		} catch (UtilException e) {
 

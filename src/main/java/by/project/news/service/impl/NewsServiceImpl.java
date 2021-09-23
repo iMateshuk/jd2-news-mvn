@@ -28,6 +28,7 @@ public class NewsServiceImpl implements NewsService {
 	private static final String EXP_TITLE = ".*\\*+.*";
 
 	private static final String EMPTY = "";
+	private static final String ID = String.valueOf(Integer.MAX_VALUE);
 
 	private static final int TITLE_LENGHT = 2;
 	private static final int FIELD_LENGHT = 3;
@@ -228,6 +229,11 @@ public class NewsServiceImpl implements NewsService {
 				fieldsData.put(k, EMPTY);
 			}
 		});
+
+		if (fieldsData.get(NewsField.ID) == null) {
+			
+			fieldsData.put(NewsField.ID, ID);
+		}
 
 		String value;
 
