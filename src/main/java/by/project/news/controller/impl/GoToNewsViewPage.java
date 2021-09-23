@@ -32,7 +32,7 @@ public class GoToNewsViewPage implements Command {
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String PARAM_TITLE = "title";
+	private final static String PARAM_NEWSID = "newsId";
 	private final static String ATTRIBUTE_NEWS = "news";
 
 	private final static String commandAnswer = CommandName.NEWS_ANSWER.toString().toLowerCase();
@@ -60,17 +60,17 @@ public class GoToNewsViewPage implements Command {
 			return;
 		}
 
-		String title = (String) request.getParameter(PARAM_TITLE);
+		String newsId = (String) request.getParameter(PARAM_NEWSID);
 
-		if (title == null) {
+		if (newsId == null) {
 
-			title = (String) session.getAttribute(PARAM_TITLE);
+			newsId = (String) session.getAttribute(PARAM_NEWSID);
 		} else {
 
-			session.setAttribute(PARAM_TITLE, title);
+			session.setAttribute(PARAM_NEWSID, newsId);
 		}
 
-		if (title == null) {
+		if (newsId == null) {
 
 			response.sendRedirect(REDIRECT_ERROR + "commonerror");
 			return;
@@ -79,7 +79,7 @@ public class GoToNewsViewPage implements Command {
 		try {
 
 			request.setAttribute(ATTRIBUTE_NEWS,
-					newsServices.chooseNews(new News.NewsBuilder().setTitle(title).build()));
+					newsServices.chooseNews(new News.NewsBuilder().setId(newsId).build()));
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(PATH);
 			requestDispatcher.forward(request, response);

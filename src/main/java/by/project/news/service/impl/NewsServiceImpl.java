@@ -140,15 +140,13 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	public News chooseNews(News news) throws ServiceException {
 
-		String value = news.getTitle();
+		String value = news.getId();
 
 		try {
 
 			if (!CheckField.thisValueNull(value)) {
 
-				CheckField.checkValueLengthMin(value, TITLE_LENGHT);
-
-				CheckField.checkValueExpression(value, EXP_TITLE);
+				CheckField.checkStringIsNumber(value);
 			}
 
 			return newsDAO.chooseNews(news);

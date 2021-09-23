@@ -11,6 +11,7 @@ public class News implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private String id;
 	private String title;
 	private String brief;
 	private String body;
@@ -20,11 +21,20 @@ public class News implements Serializable {
 	}
 
 	News(NewsBuilder newsBuilder) {
+		this.id = newsBuilder.id;
 		this.title = newsBuilder.title;
 		this.brief = newsBuilder.brief;
 		this.body = newsBuilder.body;
 		this.style = newsBuilder.style;
 
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -61,7 +71,7 @@ public class News implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(style, body, brief, title);
+		return Objects.hash(id, style, body, brief, title);
 	}
 
 	@Override
@@ -73,13 +83,13 @@ public class News implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		News other = (News) obj;
-		return Objects.equals(style, other.style) && Objects.equals(body, other.body) && Objects.equals(brief, other.brief)
+		return Objects.equals(id, other.id) && Objects.equals(style, other.style) && Objects.equals(body, other.body) && Objects.equals(brief, other.brief)
 				&& Objects.equals(title, other.title);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getName() + " [title=" + title + ", brief=" + brief + ", body=" + body + ", style=" + style + "]";
+		return getClass().getName() + " [id=" + id + ", title=" + title + ", brief=" + brief + ", body=" + body + ", style=" + style + "]";
 	}
 
 	//Builder
@@ -87,6 +97,7 @@ public class News implements Serializable {
 	public static class NewsBuilder {
 
 		// optional
+		private String id;
 		private String title;
 		private String brief;
 		private String body;
@@ -95,6 +106,12 @@ public class News implements Serializable {
 		public NewsBuilder() {
 		}
 
+		public NewsBuilder setId(String id) {
+
+			this.id = id;
+			return this;
+		}
+		
 		public NewsBuilder setTitle(String title) {
 
 			this.title = title;

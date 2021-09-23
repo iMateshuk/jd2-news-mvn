@@ -133,7 +133,7 @@
 						<pre class="pre">
 							<c:out value="${news.getBody()}" />
 						</pre>
-						<a href="Controller?command=news_view&title=${news.getTitle()}">
+						<a href="Controller?command=news_view&newsId=${news.getId()}">
 							<c:out value="${gotonews_text} : ${news.getTitle()}" />
 						</a>
 					</div>

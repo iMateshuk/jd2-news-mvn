@@ -34,7 +34,6 @@
 <fmt:message bundle="${loc}" key="local.loctextnewsforce.name.andor" var="andor_txt" />
 
 <fmt:message bundle="${loc}" key="local.loctextnewstoolsadd.name.header" var="news_txt" />
-
 </head>
 <body>
 

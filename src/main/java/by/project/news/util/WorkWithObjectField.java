@@ -83,9 +83,9 @@ public class WorkWithObjectField {
 
 	}
 
-	public static void methodSet(Object object, String nameMatch, String value) throws UtilException {
+	public static void methodSet(Object objectGetMethods, String nameMatch, String value) throws UtilException {
 
-		Method[] methods = object.getClass().getMethods();
+		Method[] methods = objectGetMethods.getClass().getMethods();
 
 		String methodName;
 		nameMatch = START_SET + nameMatch;
@@ -98,7 +98,7 @@ public class WorkWithObjectField {
 
 				try {
 
-					method.invoke(object, value);
+					method.invoke(objectGetMethods, value);
 					break;
 
 				} catch (IllegalAccessException | InvocationTargetException e) {
@@ -106,8 +106,9 @@ public class WorkWithObjectField {
 					if (log.isDebugEnabled()) {
 
 						log.debug("Debug WorkWithObjectField methodSet: {}",
-								"object: " + object.toString() + "; nameMatch:" + nameMatch + "; method:" + method
-										+ "; methodName:" + methodName + "; value:" + value + ". EOM. Exc: " + e);
+								"object: " + objectGetMethods.toString() + "; nameMatch:" + nameMatch + "; method:"
+										+ method + "; methodName:" + methodName + "; value:" + value + ". EOM. Exc: "
+										+ e);
 					}
 
 					throw new UtilException("Illegal exception in reflect set method :: wwofms", e);

@@ -229,20 +229,20 @@ public class NewsDB implements NewsDAO {
 	@Override
 	public News chooseNews(News news) throws DAOException {
 
-		final String sql = NewsSQL.SQL_SELECT_ALL_W_TITLE.getSQL();
+		final String sql = NewsSQL.SQL_SELECT_ALL_W_ID.getSQL();
 
-		final String newsTitle = news.getTitle();
+		final String newId = news.getId();
 
 		try (Connection con = CON_POOL.takeConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
-			ps.setString(1, newsTitle);
+			ps.setString(1, newId);
 
 			ResultSet rs = ps.executeQuery();
 
 			if (!rs.next()) {
 
 				throw new DAOException(
-						"Can't choose news. News not exist, title: " + newsTitle + ", :: newsdaochoosetitle");
+						"Can't choose news. News not exist, title: " + newId + ", :: newsdaochoosetitle");
 			}
 
 			return BeanCreator.createNews(rs);
@@ -389,7 +389,7 @@ public class NewsDB implements NewsDAO {
 		List<News> newses = new ArrayList<>();
 
 		while (rs.next()) {
-
+			
 			newses.add(BeanCreator.createNews(rs));
 		}
 

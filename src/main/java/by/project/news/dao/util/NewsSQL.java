@@ -21,6 +21,7 @@ public enum NewsSQL {
 
 	SQL_SELECT_ALL("SELECT * FROM mynews.news"), 
 	SQL_SELECT_ALL_W_TITLE("SELECT * FROM mynews.news WHERE title=?"),
+	SQL_SELECT_ALL_W_ID("SELECT * FROM mynews.news WHERE id=?"),
 	SQL_SELECT_NEWS_ID_W_UID_A_TITLE(
 			"SELECT n.id FROM mynews.news n JOIN mynews.users u ON u.id = n.u_id WHERE u_id=? AND title=?"),
 	SQL_SELECT_TITLE_ID_W_TITLE("SELECT title, id FROM mynews.news WHERE title=?"),

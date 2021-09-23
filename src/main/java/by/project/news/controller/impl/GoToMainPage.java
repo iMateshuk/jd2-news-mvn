@@ -33,7 +33,7 @@ public class GoToMainPage implements Command {
 	
 	private final static String COMMAND_SAVE = "cmdSave";
 
-	private final static String PARAM_TITLE = "title";
+	private final static String PARAM_NEWSID = "newsId";
 
 	private final static String ATTRIBUTE_NEWSES = "newses";
 	private final static String ATTRIBUTE_MESSAGE = "message";
@@ -56,9 +56,9 @@ public class GoToMainPage implements Command {
 			return;
 		}
 
-		if (session.getAttribute(PARAM_TITLE) != null) {
+		if (session.getAttribute(PARAM_NEWSID) != null) {
 
-			session.setAttribute(PARAM_TITLE, null);
+			session.setAttribute(PARAM_NEWSID, null);
 		}
 
 		List<News> newses = null;
