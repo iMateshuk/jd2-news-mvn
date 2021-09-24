@@ -32,8 +32,6 @@
 
 <%-- <c:set var="url" value="news_tools_delete" scope="session"  /> --%>
 
-	<div class="locale">
-
 		<div class="locale">
 
 			<div class="en">
@@ -52,7 +50,6 @@
 				</form>
 			</div>
 		</div>
-	</div>
 		<br /> <br />
 
 		<div id='wrapper'>

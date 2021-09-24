@@ -29,8 +29,6 @@
 
 <%-- <c:set var="url" value="user_tools" scope="session"  /> --%>
 
-	<div class="locale">
-
 		<div class="locale">
 
 			<div class="en">
@@ -49,7 +47,6 @@
 				</form>
 			</div>
 		</div>
-	</div>
 		<br /> <br />
 
 

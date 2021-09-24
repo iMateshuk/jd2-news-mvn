@@ -32,8 +32,6 @@
 
 <%-- <c:set var="url" value="user_tools_password" scope="session"  /> --%>
 
-	<div class="locale">
-
 		<div class="locale">
 
 			<div class="en">
@@ -52,7 +50,6 @@
 				</form>
 			</div>
 		</div>
-	</div>
 		<br /> <br />
 
 		<div id='wrapper'>

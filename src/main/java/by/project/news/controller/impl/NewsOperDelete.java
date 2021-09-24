@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.project.news.bean.News;
 import by.project.news.controller.Command;
 import by.project.news.controller.CommandName;
 import by.project.news.service.NewsService;
@@ -42,41 +41,21 @@ public class NewsOperDelete implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-
 		try {
+
+			HttpSession session = request.getSession(false);
 
 			SessionWork.validateSessionUser(session);
 
-		} catch (UtilException e) {
+			SessionWork.validateRoleUser(session, UserRole.ADMIN);
 
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-			return;
-		}
-
-		try {
-
-			SessionWork.validateRoleUser(session, UserRole.ROLE_ADMIN);
-
-		} catch (UtilException e) {
-
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-		}
-
-		try {
-
-			News news = BeanCreator.createNews(request);
-
-			newsServices.delete(news);
+			newsServices.delete(BeanCreator.createNews(request));
 
 			response.sendRedirect(REDIRECT);
 
 		} catch (ServiceException e) {
 
 			log.error(e);
-
 			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
 
 		} catch (UtilException e) {

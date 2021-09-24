@@ -14,6 +14,7 @@ import by.project.news.service.ServiceProvider;
 import by.project.news.service.UserService;
 import by.project.news.util.BeanCreator;
 import by.project.news.util.SessionWork;
+import by.project.news.util.UserRole;
 import by.project.news.util.Parser;
 import by.project.news.util.UtilException;
 import jakarta.servlet.ServletException;
@@ -32,7 +33,6 @@ public class UserOperUpdate implements Command {
 	private final static String commandAuth = CommandName.USER_AUTHORIZATION.toString().toLowerCase();
 
 	private final static String ATTRIBUTE_USER = "user";
-	private final static String ROLE_ADMIN = "admin";
 
 	private final static String COMMAND = "Controller?command=";
 	private final static String MESSAGE = "&message=";
@@ -46,26 +46,17 @@ public class UserOperUpdate implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-
 		try {
+
+			HttpSession session = request.getSession(false);
 
 			SessionWork.validateSessionUser(session);
-
-		} catch (UtilException e) {
-
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-			return;
-		}
-
-		try {
 
 			User user = (User) session.getAttribute(ATTRIBUTE_USER);
 
 			UserData userData = BeanCreator.createUserData(request);
 
-			if (!(user.getLogin().equals(userData.getLogin()) || user.getRole().equals(ROLE_ADMIN))) {
+			if (!(user.getLogin().equals(userData.getLogin()) || user.getRole().equals(UserRole.ADMIN.getRole()))) {
 
 				response.sendRedirect(REDIRECT_SESSION + "wronguserlogin");
 				return;

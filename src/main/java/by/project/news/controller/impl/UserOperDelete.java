@@ -5,8 +5,6 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.project.news.bean.User;
-import by.project.news.bean.UserData;
 import by.project.news.controller.Command;
 import by.project.news.controller.CommandName;
 import by.project.news.service.ServiceException;
@@ -14,6 +12,7 @@ import by.project.news.service.ServiceProvider;
 import by.project.news.service.UserService;
 import by.project.news.util.BeanCreator;
 import by.project.news.util.SessionWork;
+import by.project.news.util.UserRole;
 import by.project.news.util.Parser;
 import by.project.news.util.UtilException;
 import jakarta.servlet.ServletException;
@@ -31,14 +30,10 @@ public class UserOperDelete implements Command {
 	private final static String commandUserDelete = CommandName.USER_DELETE.toString().toLowerCase();
 	private final static String commandAuth = CommandName.USER_AUTHORIZATION.toString().toLowerCase();
 
-	private final static String ATTRIBUTE_USER = "user";
-	private final static String ROLE_ADMIN = "admin";
-
 	private final static String COMMAND = "Controller?command=";
 	private final static String MESSAGE = "&message=";
 	private final static String ACTION = "&action=";
 
-	private final static String REDIRECT_SESSION = COMMAND + commandAnswer + ACTION + commandUserDelete + MESSAGE;
 	private final static String REDIRECT = COMMAND + commandAnswer + ACTION + commandUserDelete + MESSAGE;
 	private final static String REDIRECT_SE = COMMAND + commandAnswer + ACTION + commandUserDelete + MESSAGE;
 	private final static String REDIRECT_UE = COMMAND + commandAuth + MESSAGE;
@@ -46,32 +41,15 @@ public class UserOperDelete implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-		
 		try {
-
+			
+			HttpSession session = request.getSession(false);
+			
 			SessionWork.validateSessionUser(session);
 
-		} catch (UtilException e) {
-
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-			return;
-		}
-
-		try {
-
-			User user = (User) session.getAttribute(ATTRIBUTE_USER);
-
-			if (!user.getRole().equals(ROLE_ADMIN)) {
-
-				response.sendRedirect(REDIRECT_SESSION + "wronguserlogin");
-				return;
-			}
-
-			UserData userData = BeanCreator.createUserData(request);
-
-			userService.delete(userData);
+			SessionWork.validateRoleUser(session, UserRole.ADMIN);
+			
+			userService.delete(BeanCreator.createUserData(request));
 
 			response.sendRedirect(REDIRECT + "userdeletesuccess");
 

@@ -59,7 +59,7 @@ public class NewsOperADD implements Command {
 
 		try {
 
-			SessionWork.validateRoleUser(session, UserRole.ROLE_EDITOR);
+			SessionWork.validateRoleUser(session, UserRole.EDITOR);
 
 			newsServices.add(BeanCreator.createNews(request), (User) session.getAttribute(USER));
 

@@ -2,9 +2,9 @@ package by.project.news.util;
 
 public enum UserRole {
 	
-	ROLE_USER("user"),
-	ROLE_ADMIN("admin"),
-	ROLE_EDITOR("editor"),
+	USER("user"),
+	ADMIN("admin"),
+	EDITOR("editor"),
 	;
 	
 	private String string;

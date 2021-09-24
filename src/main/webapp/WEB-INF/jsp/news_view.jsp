@@ -26,8 +26,6 @@
 </head>
 <body>
 
-<div class="locale">
-
 		<div class="locale">
 
 			<div class="en">
@@ -46,7 +44,6 @@
 				</form>
 			</div>
 		</div>
-	</div>
 		<br /> <br />
 
 		<div id='wrapper'>

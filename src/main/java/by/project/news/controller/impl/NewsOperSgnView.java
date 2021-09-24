@@ -55,19 +55,10 @@ public class NewsOperSgnView implements Command {
 
 			SessionWork.validateSessionUser(session);
 
-		} catch (UtilException e) {
+			if (request.getParameter(CLEAN) != null) {
 
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-			return;
-		}
-
-		if (request.getParameter(CLEAN) != null) {
-
-			SessionWork.cleanAttributes(session);
-		}
-
-		try {
+				SessionWork.cleanAttributes(session);
+			}
 
 			NewsData newsData = newsServices.sgnAuthorView((User) session.getAttribute(USER),
 					new NewsData.NewsDataBuilder().setPage(SessionWork.takePage(request, session)).build());
@@ -84,6 +75,12 @@ public class NewsOperSgnView implements Command {
 			log.error(e);
 			SessionWork.cleanAttributes(session);
 			response.sendRedirect(REDIRECT_EX + Parser.excRemovePath(e.getMessage()));
+
+		} catch (UtilException e) {
+
+			log.error(e);
+			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
+			return;
 		}
 
 	}

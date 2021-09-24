@@ -14,6 +14,9 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
 
+<fmt:message bundle="${loc}" key="local.locbutton.name.ru" 	var="ru_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.en" 	var="en_button" />
+
 <fmt:message bundle="${loc}" key="local.locbutton.name.main" var="main_button" />
 <fmt:message bundle="${loc}" key="local.loctextunknowncommand.name.header" var="header_txt" />
 
@@ -22,29 +25,26 @@
 
 <%-- <c:set var="url" value="unknown_command" scope="session"  /> --%>
 
-<div class="locale">
+	<div class="locale">
 
-		<div class="locale">
+		<div class="en">
 
-			<div class="en">
+			<form action="Controller?command=change_local" method="post">
+				<input type="hidden" name="local" value="en" /> 
+				<input class="local" type="submit" value="${en_button}" />
+			</form>
+		</div>
 
-				<form action="Controller?command=change_local" method="post">
-					<input type="hidden" name="local" value="en"/>
-					<input class="local" type="submit" value="${en_button}"/>
-				</form>
-			</div>
+		<div class="ru">
 
-			<div class="ru">
-
-				<form action="Controller?command=change_local" method="post">
-					<input type="hidden" name="local" value="ru"/>
-					<input class="local" type="submit" value="${ru_button}"/>
-				</form>
-			</div>
+			<form action="Controller?command=change_local" method="post">
+				<input type="hidden" name="local" value="ru" /> 
+				<input class="local" type="submit" value="${ru_button}" />
+			</form>
 		</div>
 	</div>
-		
-		<br /> <br />
+
+	<br /> <br />
 
 	<h2>${header_txt}!</h2>
 	

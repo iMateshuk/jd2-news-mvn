@@ -230,7 +230,7 @@ public class NewsServiceImpl implements NewsService {
 			}
 		});
 
-		if (fieldsData.get(NewsField.ID) == null) {
+		if (CheckField.thisValueNull(fieldsData.get(NewsField.ID))) {
 			
 			fieldsData.put(NewsField.ID, ID);
 		}

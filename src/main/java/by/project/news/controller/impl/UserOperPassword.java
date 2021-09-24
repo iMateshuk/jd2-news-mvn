@@ -46,27 +46,17 @@ public class UserOperPassword implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-
 		try {
+
+			HttpSession session = request.getSession(false);
 
 			SessionWork.validateSessionUser(session);
-
-		} catch (UtilException e) {
-
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-			return;
-		}
-
-		try {
 
 			User user = (User) session.getAttribute(ATTRIBUTE_USER);
 
 			UserData userData = BeanCreator.createUserData(request);
 
-			if (!(user.getLogin().equals(userData.getLogin())
-					|| user.getRole().equals(UserRole.ROLE_ADMIN.getRole()))) {
+			if (!(user.getLogin().equals(userData.getLogin()) || user.getRole().equals(UserRole.ADMIN.getRole()))) {
 
 				response.sendRedirect(REDIRECT_USER + "wronguserlogin");
 				return;

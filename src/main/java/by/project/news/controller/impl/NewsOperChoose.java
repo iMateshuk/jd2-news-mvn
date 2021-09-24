@@ -54,19 +54,10 @@ public class NewsOperChoose implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-
+		
 		try {
-
+			
 			SessionWork.validateSessionUser(session);
-
-		} catch (UtilException e) {
-
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-			return;
-		}
-
-		try {
 
 			if (request.getParameter(CLEAN) != null) {
 

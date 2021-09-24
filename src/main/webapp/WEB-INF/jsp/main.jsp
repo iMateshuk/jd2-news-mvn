@@ -38,23 +38,20 @@
 
 	<div class="locale">
 
-		<div class="locale">
+		<div class="en">
 
-			<div class="en">
+			<form action="Controller?command=change_local" method="post">
+				<input type="hidden" name="local" value="en" /> 
+				<input class="local" type="submit" value="${en_button}" />
+			</form>
+		</div>
 
-				<form action="Controller?command=change_local" method="post">
-					<input type="hidden" name="local" value="en" /> <input
-						class="local" type="submit" value="${en_button}" />
-				</form>
-			</div>
+		<div class="ru">
 
-			<div class="ru">
-
-				<form action="Controller?command=change_local" method="post">
-					<input type="hidden" name="local" value="ru" /> <input
-						class="local" type="submit" value="${ru_button}" />
-				</form>
-			</div>
+			<form action="Controller?command=change_local" method="post">
+				<input type="hidden" name="local" value="ru" /> 
+				<input class="local" type="submit" value="${ru_button}" />
+			</form>
 		</div>
 	</div>
 

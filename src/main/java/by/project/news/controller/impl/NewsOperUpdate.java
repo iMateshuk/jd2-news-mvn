@@ -44,30 +44,13 @@ public class NewsOperUpdate implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-
 		try {
+
+			HttpSession session = request.getSession(false);
 
 			SessionWork.validateSessionUser(session);
 
-		} catch (UtilException e) {
-
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-			return;
-		}
-
-		try {
-
-			SessionWork.validateRoleUser(session, UserRole.ROLE_EDITOR);
-
-		} catch (UtilException e) {
-
-			log.error(e);
-			response.sendRedirect(REDIRECT_UE + Parser.excRemovePath(e.getMessage()));
-		}
-
-		try {
+			SessionWork.validateRoleUser(session, UserRole.EDITOR);
 
 			newsServices.update(BeanCreator.createNews(request), (User) session.getAttribute(USER));
 
