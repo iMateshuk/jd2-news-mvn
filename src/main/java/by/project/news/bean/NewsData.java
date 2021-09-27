@@ -63,7 +63,7 @@ public class NewsData implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(maxNewses, page, recordsPerPage);
+		return Objects.hash(maxNewses, newses, page, recordsPerPage);
 	}
 
 	@Override
@@ -75,7 +75,8 @@ public class NewsData implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		NewsData other = (NewsData) obj;
-		return maxNewses == other.maxNewses && page == other.page && recordsPerPage == other.recordsPerPage;
+		return maxNewses == other.maxNewses && Objects.equals(newses, other.newses) && page == other.page
+				&& recordsPerPage == other.recordsPerPage;
 	}
 
 	@Override
